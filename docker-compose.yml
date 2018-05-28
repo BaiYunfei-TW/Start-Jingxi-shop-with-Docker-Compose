@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  jingxi-shop-server:
+    image: 'jingxi-shop-server:1.0'
+    ports: 
+      - '80:8080'
+    networks:
+      - net-jingxi-shop
+    depends_on:
+      - jingxi-mysql
+  
+  jingxi-mysql:
+    image: 'mysql:5.6'
+    ports: 
+      - '6003:3306'
+    container_name: jingxi-mysql
+    environment:
+      MYSQL_DATABASE: jingxishop
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    networks:
+      - net-jingxi-shop
+    volumes:
+      - D:/cloud/ThoughtWorks/2018毕业生训练营/week9/docker-compose-jingxishop-mysql/my.cnf:/etc/mysql/my.cnf
+
+networks:
+  net-jingxi-shop:
